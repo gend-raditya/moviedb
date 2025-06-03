@@ -3,8 +3,14 @@
 <style>
     .card-img-top {
         height: 270px;
-        weight: 200px;
+        width: 200px;
         object-fit: cover;
+    }
+
+     .card-text.mb-2 {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 </style>
 
