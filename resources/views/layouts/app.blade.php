@@ -85,7 +85,7 @@
                                 <li>
                                     <form action="{{ route('logout') }}" method="POST" class="d-inline">
                                         @csrf
-                                        <button type="submit" class="dropdown-item">Logout</button>
+                                        <button type="submit" class="dropdown-item">Keluar</button>
                                     </form>
                                 </li>
                             </ul>
