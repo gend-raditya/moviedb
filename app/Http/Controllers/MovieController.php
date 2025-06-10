@@ -1,10 +1,12 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Movie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Category;
+use Illuminate\Support\Facades\Gate;
 
 class MovieController extends Controller
 {
@@ -34,13 +36,33 @@ class MovieController extends Controller
             'title' => 'required|string|max:255',
             'category_id' => 'required|integer|exists:categories,id',
             'year' => 'required|integer',
-            'cover_image' => 'required|url',
+            'image_option' => 'required|in:link,upload',
             'synopsis' => 'required|string',
+            'cover_image' => 'required_if:image_option,link|nullable|url',
+            'cover_upload' => 'required_if:image_option,upload|nullable|image|max:2048',
         ]);
 
-        $validated['slug'] = Str::slug($validated['title']);
+        // Buat slug
+        $slug = Str::slug($request->title);
 
-        Movie::create($validated);
+        $cover = '';
+
+        if ($request->image_option === 'upload' && $request->hasFile('cover_upload')) {
+            $imagePath = $request->file('cover_upload')->store('posters', 'public');
+            $cover = asset('storage/' . $imagePath);
+        } elseif ($request->image_option === 'link') {
+            $cover = $request->cover_image;
+        }
+
+
+        Movie::create([
+            'title' => $request->title,
+            'category_id' => $request->category_id,
+            'year' => $request->year,
+            'cover_image' => $cover,
+            'synopsis' => $request->synopsis,
+            'slug' => $slug,
+        ]);
 
         return redirect()->route('movies.index')->with('success', 'Film berhasil ditambahkan!');
     }
@@ -71,7 +93,7 @@ class MovieController extends Controller
         $movie->update($validated);
 
         return redirect()->route('movies.show', $validated['slug'] ?? $movie->slug)
-                         ->with('success', 'Film berhasil diperbarui.');
+            ->with('success', 'Film berhasil diperbarui.');
     }
 
     public function destroy($slug)
@@ -80,5 +102,11 @@ class MovieController extends Controller
         $movie->delete();
 
         return redirect()->route('movies.index')->with('success', 'Film berhasil dihapus.');
+
+        if (Gate::allows('delete')) {
+            echo "Delete movie $id";
+        } else {
+            abort(403, 'Tidak bisa doh kanciang');
+        }
     }
 }

@@ -36,6 +36,8 @@
                     <a href="{{ route('movies.edit', $movie->slug) }}" class="btn btn-warning">
                         ✏️ Edit
                     </a>
+                    @can('delete')
+
 
                     <form action="{{ route('movies.destroy', $movie->slug) }}" method="POST"
                         onsubmit="return confirm('Yakin ingin menghapus film ini?')" class="d-inline">
@@ -44,6 +46,7 @@
                         <button type="submit" class="btn btn-danger">
                             🗑️ Hapus
                         </button>
+                        @endcan
                     </form>
                 </div>
 
