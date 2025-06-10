@@ -82,12 +82,21 @@ class MovieController extends Controller
             'title' => 'required|string|max:255',
             'category_id' => 'required|integer|exists:categories,id',
             'year' => 'required|integer',
-            'cover_image' => 'required|url',
             'synopsis' => 'required|string',
+            'image_option' => 'required|in:link,upload',
+            'cover_image' => 'nullable|url|required_if:image_option,link',
+            'cover_upload' => 'nullable|image|max:2048|required_if:image_option,upload',
         ]);
+
 
         if ($movie->title !== $validated['title']) {
             $validated['slug'] = Str::slug($validated['title']);
+        }
+
+        // Handle image
+        if ($request->image_option === 'upload' && $request->hasFile('cover_upload')) {
+            $imagePath = $request->file('cover_upload')->store('posters', 'public');
+            $validated['cover_image'] = asset('storage/' . $imagePath);
         }
 
         $movie->update($validated);
@@ -95,7 +104,6 @@ class MovieController extends Controller
         return redirect()->route('movies.show', $validated['slug'] ?? $movie->slug)
             ->with('success', 'Film berhasil diperbarui.');
     }
-
     public function destroy($slug)
     {
         $movie = Movie::where('slug', $slug)->firstOrFail();
