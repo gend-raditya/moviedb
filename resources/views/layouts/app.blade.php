@@ -65,8 +65,9 @@
                         <a class="nav-link" href="{{ route('movies.index') }}">Beranda</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Kategori</a>
+                        <a class="nav-link" href="{{ route('categories.index') }}">Kategori</a>
                     </li>
+
 
                     @auth
                         <li class="nav-item">

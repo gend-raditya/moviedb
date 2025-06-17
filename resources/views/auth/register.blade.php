@@ -127,7 +127,7 @@
             </div>
 
             <div class="d-grid">
-                <button type="submit" class="btn btn-success">Daftar</button>
+                <button type="submit" class="btn btn-primary">Daftar</button>
             </div>
 
             <p class="mt-3 text-center">

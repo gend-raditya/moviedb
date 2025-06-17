@@ -34,7 +34,7 @@
                 <!-- Tombol Edit dan Hapus berdampingan -->
                 <div class="d-flex gap-2">
                     <a href="{{ route('movies.edit', $movie->slug) }}" class="btn btn-warning">
-                        ✏️ Edit
+                        ✏️ 
                     </a>
                     @can('delete')
 
@@ -44,7 +44,7 @@
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger">
-                            🗑️ Hapus
+                            🗑️
                         </button>
                         @endcan
                     </form>

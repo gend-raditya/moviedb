@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MovieController;
 use App\Http\Middleware\RoleAdmin;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\CategoryController;
 
 Route::get('/movies', [MovieController::class, 'index'])->name('movies.index');
 
@@ -19,6 +20,8 @@ Route::get('/movies/{slug}/edit', [MovieController::class, 'edit'])->name('movie
 Route::put('/movies/{slug}', [MovieController::class, 'update'])->name('movies.update');
 
 Route::delete('/movies/{slug}', [MovieController::class, 'destroy'])->name('movies.destroy')->middleware('auth');
+
+Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
 
 
 // routes/web.php
