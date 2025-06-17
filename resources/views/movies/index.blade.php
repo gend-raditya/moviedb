@@ -17,7 +17,7 @@
 
     @section('content')
     <div class="container py-5" style="background-color: #a4c0ea;">
-        <h1 class="mb-4 text-center">🎬 Daftar Film Terbaru</h1>
+        <h1 class="mb-4 text-center">Daftar Film Terbaru</h1>
 
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
             @forelse ($movies as $movie)

@@ -4,6 +4,12 @@
 <div class="container py-5">
     <h2 class="mb-4 text-center fw-bold">🎬 Daftar Kategori Film</h2>
 
+    <div class="mb-4 text-end">
+    <a href="{{ route('categories.create') }}" class="btn btn-primary">
+        ➕ Tambah Kategori
+    </a>
+</div>
+
     <div class="row">
         @forelse ($categories as $category)
             <div class="col-md-6 col-lg-4 mb-4">

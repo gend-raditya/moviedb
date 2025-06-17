@@ -22,6 +22,9 @@ Route::put('/movies/{slug}', [MovieController::class, 'update'])->name('movies.u
 Route::delete('/movies/{slug}', [MovieController::class, 'destroy'])->name('movies.destroy')->middleware('auth');
 
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
+Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
+
 
 
 // routes/web.php

@@ -62,6 +62,7 @@ class MovieController extends Controller
             'cover_image' => $cover,
             'synopsis' => $request->synopsis,
             'slug' => $slug,
+
         ]);
 
         return redirect()->route('movies.index')->with('success', 'Film berhasil ditambahkan!');
@@ -86,6 +87,7 @@ class MovieController extends Controller
             'image_option' => 'required|in:link,upload',
             'cover_image' => 'nullable|url|required_if:image_option,link',
             'cover_upload' => 'nullable|image|max:2048|required_if:image_option,upload',
+
         ]);
 
 
@@ -114,7 +116,7 @@ class MovieController extends Controller
         if (Gate::allows('delete')) {
             echo "Delete movie $id";
         } else {
-            abort(403, 'Tidak bisa doh kanciang');
+            abort(403, 'Tidak bisa');
         }
     }
 }

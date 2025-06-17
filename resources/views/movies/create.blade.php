@@ -87,7 +87,7 @@
                     </div>
 
 
-                    <div class="mb-4">
+                   <div class="mb-4">
                         <label for="synopsis" class="form-label fw-semibold">Deskripsi</label>
                         <textarea class="form-control rounded-3 shadow-sm @error('synopsis') is-invalid @enderror" id="synopsis"
                             name="synopsis" rows="4" required>{{ old('synopsis') }}</textarea>
@@ -95,6 +95,7 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
+                    
 
                     <div class="d-flex justify-content-between">
                         <button type="submit" class="btn btn-success px-4 py-2 rounded-pill">Simpan</button>
@@ -106,28 +107,27 @@
         </div>
     </div>
     <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const linkOption = document.getElementById('option_link');
-        const uploadOption = document.getElementById('option_upload');
-        const linkInput = document.getElementById('link_input');
-        const uploadInput = document.getElementById('upload_input');
+        document.addEventListener('DOMContentLoaded', function() {
+            const linkOption = document.getElementById('option_link');
+            const uploadOption = document.getElementById('option_upload');
+            const linkInput = document.getElementById('link_input');
+            const uploadInput = document.getElementById('upload_input');
 
-        function toggleInputs() {
-            if (linkOption.checked) {
-                linkInput.style.display = '';
-                uploadInput.style.display = 'none';
-            } else {
-                linkInput.style.display = 'none';
-                uploadInput.style.display = '';
+            function toggleInputs() {
+                if (linkOption.checked) {
+                    linkInput.style.display = '';
+                    uploadInput.style.display = 'none';
+                } else {
+                    linkInput.style.display = 'none';
+                    uploadInput.style.display = '';
+                }
             }
-        }
 
-        linkOption.addEventListener('change', toggleInputs);
-        uploadOption.addEventListener('change', toggleInputs);
-        toggleInputs(); // Panggil pertama kali saat load
-    });
-</script>
-
+            linkOption.addEventListener('change', toggleInputs);
+            uploadOption.addEventListener('change', toggleInputs);
+            toggleInputs(); // Panggil pertama kali saat load
+        });
+    </script>
 @endsection
 
 @push('scripts')

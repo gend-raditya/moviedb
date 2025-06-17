@@ -90,6 +90,7 @@
         uploadOption.addEventListener('change', toggleInputs);
         toggleInputs();
     });
+    
 </script>
 
 @endsection
