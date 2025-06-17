@@ -132,7 +132,7 @@
 
             <p class="mt-3 text-center">
                 Sudah punya akun?
-                <a href="{{ route('login') }}" class="text-warning">Login</a>
+                <a href="{{ route('login') }}" class="text-primary">Login</a>
             </p>
 
         </form>
