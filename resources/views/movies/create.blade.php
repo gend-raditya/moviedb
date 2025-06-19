@@ -86,8 +86,25 @@
                         @enderror
                     </div>
 
+                    <div class="mb-3">
+                        <label for="trailer_url" class="form-label">URL Trailer (opsional)</label>
+                        <input type="url" name="trailer_url" id="trailer_url" class="form-control"
+                            value="{{ old('trailer_url') }}">
+                    </div>
 
-                   <div class="mb-4">
+                    <div class="mb-4">
+                        <label for="actors" class="form-label fw-semibold">Pemeran (pisahkan dengan koma)</label>
+                        <input type="text" class="form-control rounded-3 shadow-sm @error('actors') is-invalid @enderror"
+                            id="actors" name="actors" value="{{ old('actors', $movie->actors ?? '') }}">
+                        @error('actors')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+
+
+
+                    <div class="mb-4">
                         <label for="synopsis" class="form-label fw-semibold">Deskripsi</label>
                         <textarea class="form-control rounded-3 shadow-sm @error('synopsis') is-invalid @enderror" id="synopsis"
                             name="synopsis" rows="4" required>{{ old('synopsis') }}</textarea>
@@ -95,7 +112,7 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-                    
+
 
                     <div class="d-flex justify-content-between">
                         <button type="submit" class="btn btn-success px-4 py-2 rounded-pill">Simpan</button>

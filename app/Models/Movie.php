@@ -14,6 +14,8 @@ class Movie extends Model
         'year',
         'cover_image',
         'synopsis',
+         'trailer_url',
+         'actors',
     ];
 
     public function category()

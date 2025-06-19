@@ -20,6 +20,10 @@ class MovieController extends Controller
     {
         // Ambil movie dengan relasi category berdasarkan slug
         $movie = Movie::with('category')->where('slug', $slug)->firstOrFail();
+        if ($movie->trailer_url && str_contains($movie->trailer_url, 'watch?v=')) {
+            $movie->trailer_url = str_replace('watch?v=', 'embed/', $movie->trailer_url);
+        }
+
         return view('movies.show', compact('movie'));
     }
 
@@ -40,6 +44,10 @@ class MovieController extends Controller
             'synopsis' => 'required|string',
             'cover_image' => 'required_if:image_option,link|nullable|url',
             'cover_upload' => 'required_if:image_option,upload|nullable|image|max:2048',
+            'trailer_url' => 'nullable|url',
+             'actors' => 'nullable|string',
+
+
         ]);
 
         // Buat slug
@@ -62,6 +70,8 @@ class MovieController extends Controller
             'cover_image' => $cover,
             'synopsis' => $request->synopsis,
             'slug' => $slug,
+            'trailer_url' => $validated['trailer_url'],
+            'actors' => $validated['actors'] ?? null,
 
         ]);
 
@@ -87,6 +97,10 @@ class MovieController extends Controller
             'image_option' => 'required|in:link,upload',
             'cover_image' => 'nullable|url|required_if:image_option,link',
             'cover_upload' => 'nullable|image|max:2048|required_if:image_option,upload',
+            'trailer_url' => 'nullable|url',
+             'actors' => 'nullable|string',
+
+
 
         ]);
 

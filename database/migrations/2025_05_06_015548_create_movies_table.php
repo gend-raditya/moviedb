@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug');
             $table->text('synopsis')->nullable();
-            
+            $table->string('trailer_url')->nullable();
+
            $table->foreignId('category_id')->constrained();//colom foreign key
            $table->year('year');
            $table->text('actors')->nullable();
